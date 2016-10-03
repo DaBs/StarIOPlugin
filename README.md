@@ -1,4 +1,4 @@
-# StarIOPlugin Fork
+# StarIOPlugin
 Phonegap plugin for Star Micronics bluetooth printers. It works with Android and iOS
 
 
