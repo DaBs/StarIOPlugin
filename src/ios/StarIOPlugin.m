@@ -395,7 +395,7 @@ static NSString *dataCallbackId = nil;
     [dict setObject:[portInfo portName] forKey:@"portName"];
     [dict setObject:[portInfo macAddress] forKey:@"macAddress"];
     [dict setObject:[portInfo modelName] forKey:@"modelName"];
-    [dict setObject:[NSNumber numberWithBool:[portInfo isConnected]] forKey:@"isConnected"];
+    [dict setObject:[NSNumber numberWithBool:YES] forKey:@"isConnected"];
     return dict;
 }
 
