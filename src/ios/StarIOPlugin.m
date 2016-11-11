@@ -179,7 +179,7 @@ static NSString *dataCallbackId = nil;
         }
         
         if (_starIoExtManager == nil) {
-            _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeWithBarcodeReader
+            _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeStandard
                                                               portName:portName
                                                           portSettings:@""
                                                        ioTimeoutMillis:10000];
