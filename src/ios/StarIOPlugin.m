@@ -198,6 +198,16 @@ static NSString *dataCallbackId = nil;
     }];
 }
 
+- (void)disconnect:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^{
+        if (_starIoExtManager != nil && _starIoExtManager.port != nil) {
+            [_starIoExtManager disconnect];
+        }
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    }];
+}
+
 - (void)printReceipt:(CDVInvokedUrlCommand *)command {
     NSLog(@"printing receipt");
     [self.commandDelegate runInBackground:^{
