@@ -171,41 +171,37 @@ static NSString *dataCallbackId = nil;
 }
 
 - (void)connect:(CDVInvokedUrlCommand *)command {
-    [self.commandDelegate runInBackground:^{
-        NSString *portName = nil;
+    NSString *portName = nil;
+    
+    if (command.arguments.count > 0) {
+        portName = [command.arguments objectAtIndex:0];
+    }
+    
+    if (_starIoExtManager == nil) {
+        _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeStandard
+                                                          portName:portName
+                                                      portSettings:@""
+                                                   ioTimeoutMillis:10000];
         
-        if (command.arguments.count > 0) {
-            portName = [command.arguments objectAtIndex:0];
-        }
-        
-        if (_starIoExtManager == nil) {
-            _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeStandard
-                                                              portName:portName
-                                                          portSettings:@""
-                                                       ioTimeoutMillis:10000];
-            
-            _starIoExtManager.delegate = self;
-        }
-        
-        if (_starIoExtManager.port != nil) {
-            [_starIoExtManager disconnect];
-        }
-        
-        dataCallbackId = command.callbackId;
-        CDVPluginResult	*result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:[_starIoExtManager connect]];
-        [result setKeepCallbackAsBool:YES];
-        [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
-    }];
+        _starIoExtManager.delegate = self;
+    }
+    
+    if (_starIoExtManager.port != nil) {
+        [_starIoExtManager disconnect];
+    }
+    
+    dataCallbackId = command.callbackId;
+    CDVPluginResult	*result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:[_starIoExtManager connect]];
+    [result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
 }
 
 - (void)disconnect:(CDVInvokedUrlCommand *)command {
-    [self.commandDelegate runInBackground:^{
-        if (_starIoExtManager != nil && _starIoExtManager.port != nil) {
-            [_starIoExtManager disconnect];
-        }
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES];
-        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-    }];
+    if (_starIoExtManager != nil && _starIoExtManager.port != nil) {
+        [_starIoExtManager disconnect];
+    }
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 - (void)printReceipt:(CDVInvokedUrlCommand *)command {
