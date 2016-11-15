@@ -3,7 +3,7 @@
  *  @framework StarIOPort
  *
  *  @discussion Entry point to StarIO.
- *  @copyright 2016 Star Micronics Co., Ltd. All rights reserved.
+ *  @copyright 2015 Star Micronics Co., Ltd. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
@@ -35,6 +35,7 @@
 @property(retain, readonly) NSString *portName;
 @property(retain, readonly) NSString *macAddress;
 @property(retain, readonly) NSString *modelName;
+@property(readonly, getter=isConnected) BOOL connected;
 
 @end
 
@@ -195,26 +196,4 @@
 - (BOOL)connected;
 
 + (void)setMACAddressSourceBlock:(NSString *(^)(EAAccessory *accessory))macAddressSourceBlock;
-
-//
-// NSError was added to the argument of API.
-//
-
-- (u_int32_t)writePort:(u_int8_t const *)writeBuffer :(u_int32_t)offSet :(u_int32_t)size :(NSError **)error;
-
-- (u_int32_t)readPort:(u_int8_t *)readBuffer :(u_int32_t)offSet :(u_int32_t)size :(NSError **)error;
-
-- (SM_BOOLEAN)getParsedStatus:(void *)starPrinterStatus :(u_int32_t)level :(NSError **)error;
-
-- (NSDictionary *)getFirmwareInformation:(NSError **)error;
-
-- (NSDictionary *)getDipSwitchInformation:(NSError **)error;
-
-- (bool)getOnlineStatus:(NSError **)error __attribute__((unavailable("Not available. Please change to getOnlineStatusWithError:.")));
-- (SM_BOOLEAN)getOnlineStatusWithError:(NSError **)error;
-
-- (SM_BOOLEAN)beginCheckedBlock:(void *)starPrinterStatus :(u_int32_t)level :(NSError **)error;
-
-- (SM_BOOLEAN)endCheckedBlock:(void *)starPrinterStatus :(u_int32_t)level :(NSError **)error;
-
 @end

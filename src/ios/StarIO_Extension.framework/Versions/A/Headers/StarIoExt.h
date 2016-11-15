@@ -10,24 +10,10 @@
 
 #import "ISCBBuilder.h"
 
-typedef NS_ENUM(NSInteger, StarIoExtEmulation) {     // Don't insert!
-    StarIoExtEmulationNone = 0,
-    StarIoExtEmulationStarPRNT,
-    StarIoExtEmulationStarLine,
-    StarIoExtEmulationStarGraphic,
-    StarIoExtEmulationEscPos,
-    StarIoExtEmulationEscPosMobile,
-    StarIoExtEmulationStarDotImpact
-};
-
 @interface StarIoExt : NSObject
-
-// Generic.
 
 + (NSString *)description;
 
-// Command Builder.
-
-+ (ISCBBuilder *)createCommandBuilder:(StarIoExtEmulation)emulation;
++ (ISCBBuilder *)createCommandBuilder:(SCBFactoryEmulation)emulation;
 
 @end
