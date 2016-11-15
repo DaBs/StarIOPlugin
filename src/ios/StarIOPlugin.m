@@ -178,7 +178,7 @@ static NSString *dataCallbackId = nil;
     }
     
     if (_starIoExtManager == nil) {
-        _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeStandard
+        _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeWithBarcodeReader
                                                           portName:portName
                                                       portSettings:@""
                                                    ioTimeoutMillis:10000];
@@ -395,7 +395,7 @@ static NSString *dataCallbackId = nil;
     [dict setObject:[portInfo portName] forKey:@"portName"];
     [dict setObject:[portInfo macAddress] forKey:@"macAddress"];
     [dict setObject:[portInfo modelName] forKey:@"modelName"];
-    [dict setObject:[NSNumber numberWithBool:NO] forKey:@"isConnected"];
+    [dict setObject:[NSNumber numberWithBool:[portInfo isConnected]] forKey:@"isConnected"];
     return dict;
 }
 
