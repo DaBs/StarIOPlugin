@@ -176,19 +176,17 @@ static NSString *dataCallbackId = nil;
     if (command.arguments.count > 0) {
         portName = [command.arguments objectAtIndex:0];
     }
-    
-    if (_starIoExtManager == nil) {
-        _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeWithBarcodeReader
-                                                          portName:portName
-                                                      portSettings:@""
-                                                   ioTimeoutMillis:10000];
-        
-        _starIoExtManager.delegate = self;
-    }
-    
+
     if (_starIoExtManager.port != nil) {
         [_starIoExtManager disconnect];
     }
+    
+    _starIoExtManager = [[StarIoExtManager alloc] initWithType:StarIoExtManagerTypeWithBarcodeReader
+                                                      portName:portName
+                                                  portSettings:@""
+                                               ioTimeoutMillis:10000];
+    
+    _starIoExtManager.delegate = self;
     
     dataCallbackId = command.callbackId;
     CDVPluginResult	*result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:[_starIoExtManager connect]];
@@ -395,7 +393,7 @@ static NSString *dataCallbackId = nil;
     [dict setObject:[portInfo portName] forKey:@"portName"];
     [dict setObject:[portInfo macAddress] forKey:@"macAddress"];
     [dict setObject:[portInfo modelName] forKey:@"modelName"];
-    [dict setObject:[NSNumber numberWithBool:[portInfo isConnected]] forKey:@"isConnected"];
+    // [dict setObject:[NSNumber numberWithBool:[portInfo isConnected]] forKey:@"isConnected"];
     return dict;
 }
 
