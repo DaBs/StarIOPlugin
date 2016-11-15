@@ -194,6 +194,15 @@ static NSString *dataCallbackId = nil;
     [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
 }
 
+- (void)disconnect:(CDVInvokedUrlCommand *)command {
+    if (_starIoExtManager.port != nil) {
+        [_starIoExtManager disconnect];
+    }
+    
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES];
+    [self.commandDelegate sendPluginResult:result callbackId:dataCallbackId];
+}
+
 - (void)printReceipt:(CDVInvokedUrlCommand *)command {
     NSLog(@"printing receipt");
     [self.commandDelegate runInBackground:^{

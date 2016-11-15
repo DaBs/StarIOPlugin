@@ -47,5 +47,6 @@
 - (void)portDiscovery:(CDVInvokedUrlCommand *)command;
 - (void)checkStatus:(CDVInvokedUrlCommand *)command;
 - (void)connect:(CDVInvokedUrlCommand *)command;
+- (void)disconnect:(CDVInvokedUrlCommand *)command;
 - (void)printReceipt:(CDVInvokedUrlCommand *)command;
 @end
