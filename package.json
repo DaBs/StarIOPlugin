@@ -11,11 +11,7 @@
   },
   "repository": {
     "type": "git",
-<<<<<<< HEAD
     "url": "git+https://github.com/Rcjuk/StarIOPlugin.git"
-=======
-    "url": "git+https://github.com/InteractiveObject/StarIOPlugin.git"
->>>>>>> ee10b1f2a6a9fb6151a8ffdca1c5583c9e491742
   },
   "keywords": [
     "ecosystem:cordova",
@@ -31,13 +27,7 @@
   "author": "Interactive Object",
   "license": "MIT",
   "bugs": {
-<<<<<<< HEAD
     "url": "https://github.com/Rcjuk/StarIOPlugin/issues"
   },
   "homepage": "https://github.com/Rcjuk/StarIOPlugin#readme"
-=======
-    "url": "https://github.com/InteractiveObject/StarIOPlugin/issues"
-  },
-  "homepage": "https://github.com/InteractiveObject/StarIOPlugin#readme"
->>>>>>> ee10b1f2a6a9fb6151a8ffdca1c5583c9e491742
 }
