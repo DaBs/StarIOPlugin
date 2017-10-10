@@ -237,6 +237,7 @@ static NSString *dataCallbackId = nil;
         if (_starIoExtManager != nil) {
             [_starIoExtManager.lock unlock];
         }
+        [_starIoExtManager disconnect];
 
         CDVPluginResult	*result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:printResult];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
