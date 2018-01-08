@@ -26,6 +26,24 @@ module.exports = {
                 callback(error)
             }, 'StarIOPlugin', 'printReceipt', [port, receipt]);
     },
+    printBuffer: function (port, buffer, callback) {
+
+        var blob = new Blob([buffer], { type: 'text/plain' });
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+            const bufferString = event.target.result;
+
+            exec(function (result) {
+                callback(null, result)
+            },
+            function (error) {
+                callback(error)
+            }, 'StarIOPlugin', 'printBuffer', [port, bufferString]);
+        };
+
+        reader.readAsText(blob);
+    },
     openCashDrawer: function (port, callback) {
         exec(function (result) {
                 callback(null, result)

@@ -239,6 +239,16 @@ public class StarIOPlugin extends CordovaPlugin {
         return sendCommand(context, portName, portSettings, list, callbackContext);
     }
 
+    private boolean printBuffer(String portName, String portSettings, String bufferString, CallbackContext callbackContext) throws JSONException {
+
+        Context context = this.cordova.getActivity();
+
+        ArrayList<byte[]> list = new ArrayList<byte[]>();
+        list.add(createCpUTF8(receipt));
+
+        return sendCommand(context, portName, portSettings, list, callbackContext);
+    }
+
     private boolean sendCommand(Context context, String portName, String portSettings, ArrayList<byte[]> byteList, CallbackContext callbackContext) {
         StarIOPort port = null;
         try {
