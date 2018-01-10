@@ -28,11 +28,13 @@ module.exports = {
     },
     printBuffer: function (port, buffer, callback) {
 
-        var blob = new Blob([buffer], { type: 'text/plain' });
+        var blob = new Blob([buffer], { type: 'application/octet-binary' });
         var reader = new FileReader();
 
         reader.onload = function(event) {
-            const bufferString = event.target.result;
+            let bufferString = event.target.result;
+
+            bufferString = bufferString.substring(bufferString.indexOf(',') + 1);
 
             exec(function (result) {
                 callback(null, result)

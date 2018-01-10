@@ -244,7 +244,7 @@ public class StarIOPlugin extends CordovaPlugin {
         Context context = this.cordova.getActivity();
 
         ArrayList<byte[]> list = new ArrayList<byte[]>();
-        list.add(createCpUTF8(receipt));
+        list.add(createCpUTF8(bufferString));
 
         return sendCommand(context, portName, portSettings, list, callbackContext);
     }
