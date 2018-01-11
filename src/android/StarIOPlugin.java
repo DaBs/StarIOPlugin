@@ -5,6 +5,8 @@ import org.apache.cordova.CallbackContext;
 
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Base64;
 import android.util.Log;
 
 
@@ -49,7 +52,14 @@ public class StarIOPlugin extends CordovaPlugin {
             String port = args.getString(0);
             this.portDiscovery(port, callbackContext);
             return true;
-        }else {
+        }else if (action.equals(("printBuffer"))) {
+            String portName = args.getString(0);
+            String portSettings = getPortSettingsOption(portName);
+            String buffer = args.getString(1);
+
+            this.printBuffer(portName, portSettings, buffer, callbackContext);
+            return true;
+        } else {
             String portName = args.getString(0);
             String portSettings = getPortSettingsOption(portName);
             String receipt = args.getString(1);
@@ -236,6 +246,7 @@ public class StarIOPlugin extends CordovaPlugin {
         list.add(new byte[] { 0x1b, 0x64, 0x02 }); // Cut
         list.add(new byte[]{0x07}); // Kick cash drawer
 
+        //return false;
         return sendCommand(context, portName, portSettings, list, callbackContext);
     }
 
@@ -244,8 +255,9 @@ public class StarIOPlugin extends CordovaPlugin {
         Context context = this.cordova.getActivity();
 
         ArrayList<byte[]> list = new ArrayList<byte[]>();
-        list.add(createCpUTF8(bufferString));
+        list.add(createCpBase64(bufferString));
 
+        //return false;
         return sendCommand(context, portName, portSettings, list, callbackContext);
     }
 
@@ -323,6 +335,12 @@ public class StarIOPlugin extends CordovaPlugin {
         } catch (UnsupportedEncodingException e) {
             byteBuffer = inputText.getBytes();
         }
+
+        return byteBuffer;
+    }
+
+    private byte[] createCpBase64(String inputText) {
+        byte[] byteBuffer = Base64.decode(inputText, Base64.DEFAULT);
 
         return byteBuffer;
     }
