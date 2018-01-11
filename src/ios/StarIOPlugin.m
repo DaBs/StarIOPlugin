@@ -250,6 +250,7 @@ static NSString *dataCallbackId = nil;
         NSMutableData *commands = [NSMutableData data];
         NSString *portName = nil;
         NSString *content = nil;
+        
         SMPort *port = nil;
 
         if (command.arguments.count > 0) {
@@ -263,7 +264,9 @@ static NSString *dataCallbackId = nil;
             port = [_starIoExtManager port];
         }
 
-        [commands appendData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:content options:0];
+
+        [commands appendData:decodedData];
 
         if (_starIoExtManager != nil) {
             [_starIoExtManager.lock lock];
